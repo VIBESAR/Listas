@@ -42,12 +42,22 @@ public class Principal {
         System.out.println("lista " + lista);
         
         lista.visualizar();
-        
-        
 
-         // Ejercicio 1: Ordernar la lista de forma ascendente
+                // Ejercicio 1: Ordernar la lista de forma ascendente
 
+                System.out.println("Lista Ascendente");
+                Lista listaOrdenar = new Lista();
+                listaOrdenar.insertarCabezaLista(8);
+                listaOrdenar.insertarCabezaLista(3);
+                listaOrdenar.insertarCabezaLista(1);
+                listaOrdenar.insertarCabezaLista(5);
+                listaOrdenar.insertarCabezaLista(2);
 
+                System.out.println("Lista original:");
+                listaOrdenar.visualizar();
+
+                System.out.println("Lista ordenada:");
+                listaOrdenar.visualizar();
 
          // Ejercicio 2: Unir dos listas enlazadas
 
