@@ -113,80 +113,52 @@ public class Lista {
             n = n.enlace;
         }
     }
-    
-    /**
-     * 1 - Método para invertir la lista enlazada
-     */
-    public void invertirLista() {
-        Nodo prev = null;
-        Nodo current = primero;
-        Nodo next;
-        while (current != null) {
-            next = current.enlace;
-            current.enlace = prev;
-            prev = current;
-            current = next;
-        }
-        primero = prev;
-    }
 
     /**
-     * 2 - Método para obtener el elemento en la posición n desde el final
+     * 1 - Método para ordenar la lista de forma ascendente
      */
-    public int obtenerDesdeFinal(int n) {
-        Nodo principal = primero;
-        Nodo referencia = primero;
-        int count = 0;
-
-        while (count < n) {
-            if (referencia == null) return -1; 
-            referencia = referencia.enlace;
-            count++;
+    public void ordenarAscendente() {
+        if (primero == null || primero.enlace == null) {
+            return;
         }
-
-        while (referencia != null) {
-            principal = principal.enlace;
-            referencia = referencia.enlace;
-        }
-
-        return principal.dato;
-    }
-
-    /**
-     * 3 - Método para eliminar duplicados en una lista enlazada
-     */
-    public void eliminarDuplicados() {
-        Nodo actual = primero;
-
-        while (actual != null && actual.enlace != null) {
-            Nodo comparador = actual;
-
-            while (comparador.enlace != null) {
-                if (actual.dato == comparador.enlace.dato) {
-                    comparador.enlace = comparador.enlace.enlace; 
-                } else {
-                    comparador = comparador.enlace;
+        Nodo actual, indice;
+        int temp;
+        for (actual = primero; actual != null; actual = actual.enlace) {
+            for (indice = actual.enlace; indice != null; indice = indice.enlace) {
+                if (actual.dato > indice.dato) {
+                    temp = actual.dato;
+                    actual.dato = indice.dato;
+                    indice.dato = temp;
                 }
             }
-            actual = actual.enlace;
         }
     }
-
 
     /**
-     * 4 - Método para obtener el tamaño de la lista enlazada
+     * 2 - Método para unir dos listas enlazadas
      */
-    public int obtenerTamanio() {
-        int count = 0;
+    public void unirListas(Lista otraLista) {
+        if (primero == null) {
+            primero = otraLista.primero;
+            return;
+        }
         Nodo temp = primero;
-        while (temp != null) {
-            count++;
+        while (temp.enlace != null) {
             temp = temp.enlace;
         }
-        return count;
+        temp.enlace = otraLista.primero;
     }
-    
-    
-   
-    
+
+    // 3. Método para separar números pares e impares en dos listas enlazadas diferentes
+    public void separarParesImpares(Lista listaPares, Lista listaImpares) {
+        Nodo temp = primero;
+        while (temp != null) {
+            if (temp.dato % 2 == 0) {
+                listaPares.insertarCabezaLista(temp.dato);
+            } else {
+                listaImpares.insertarCabezaLista(temp.dato);
+            }
+            temp = temp.enlace;
+        }
+    }
 }
